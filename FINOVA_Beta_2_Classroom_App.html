@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINOVA — Beta Banking Experience</title>
+<style>
+:root{--navy:#101a3a;--blue:#4169f5;--purple:#7957f5;--muted:#77809a;--line:#e9ecf5;--bg:#f5f7ff;--green:#16b887;--red:#ef5574}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f3f6ff,#f8f5ff);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial;color:var(--navy)}
+button,input{font:inherit}button{cursor:pointer;border:0}.app{min-height:100vh;display:flex}.sidebar{width:245px;background:#fff;border-right:1px solid var(--line);padding:28px 18px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:10px;font-size:23px;font-weight:850;letter-spacing:-1px}.brandmark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--purple));display:grid;place-items:center;color:#fff;font-weight:900}.beta{font-size:10px;color:#6d57d9;background:#f0edff;padding:4px 7px;border-radius:20px;letter-spacing:.5px}.nav{display:grid;gap:8px}.nav button{background:transparent;color:#66708a;text-align:left;padding:12px 14px;border-radius:12px;font-weight:650;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#eef2ff;color:#3459e9}.nav .ico{width:20px;text-align:center}.side-note{margin-top:auto;background:#f6f5ff;border:1px solid #ebe7ff;border-radius:16px;padding:14px;font-size:12px;color:#6e7190;line-height:1.5}.main{flex:1;min-width:0;padding:28px 34px 50px;max-width:1500px;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.eyebrow{font-size:12px;color:#8b91a7;font-weight:700;letter-spacing:1px;text-transform:uppercase}.topbar h1{font-size:27px;margin:5px 0 0;letter-spacing:-.8px}.user{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);padding:8px 13px;border-radius:30px;font-size:13px;font-weight:700}.avatar{width:32px;height:32px;border-radius:50%;background:#e8eaff;color:#4b5edb;display:grid;place-items:center}.content{max-width:1080px}.welcome{margin-bottom:22px}.welcome h2{font-size:21px;margin:0 0 5px}.welcome p{color:var(--muted);margin:0;font-size:14px}.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 24px rgba(42,57,120,.04)}.balance-card{background:linear-gradient(125deg,#3459ee,#7957f5);color:#fff;border:0;min-height:190px;position:relative;overflow:hidden}.balance-card:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #ffffff30;border-radius:50%;right:-45px;top:-90px;box-shadow:0 0 0 25px #ffffff0d,0 0 0 55px #ffffff0a}.balance-label{font-size:13px;color:#e2e8ff}.balance{font-size:36px;font-weight:850;margin:12px 0 18px;letter-spacing:-1px}.smallrow{display:flex;gap:18px;font-size:12px;color:#e2e8ff}.card-title{font-weight:800;font-size:15px;margin:0 0 16px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quick button{background:#f5f6ff;border:1px solid #edf0ff;border-radius:15px;padding:16px 8px;color:#33416c;font-weight:700;font-size:12px}.quick button span{display:block;font-size:22px;margin-bottom:8px}.section{display:none}.section.active{display:block}.activity{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-top:1px solid #f0f1f7}.activity:first-of-type{border-top:0}.activity .left{display:flex;align-items:center;gap:11px}.bubble{width:38px;height:38px;border-radius:13px;background:#eff2ff;display:grid;place-items:center;font-size:17px}.activity strong{display:block;font-size:13px}.activity small{color:#8b91a7;font-size:11px}.amount{font-size:13px;font-weight:800}.positive{color:var(--green)}.negative{color:#27304d}.pill{font-size:10px;padding:5px 8px;border-radius:20px;background:#fff1f3;color:#d94a69;font-weight:800}.formcard{max-width:650px}.field{display:grid;gap:7px;margin:17px 0}.field label{font-size:12px;font-weight:750;color:#626d89}.field input{width:100%;padding:14px;border:1px solid #e3e7f2;border-radius:12px;outline:none;background:#fbfcff;color:var(--navy)}.field input:focus{border-color:#8296ff;box-shadow:0 0 0 3px #4169f51a}.primary{width:100%;padding:14px 18px;border-radius:12px;background:linear-gradient(100deg,var(--blue),var(--purple));color:#fff;font-weight:800;box-shadow:0 8px 18px #5b63e533}.secondary{padding:10px 14px;border-radius:10px;background:#f0f2ff;color:#465ce1;font-weight:750}.hint{font-size:12px;color:#8991a8;line-height:1.5}.notice{padding:13px 15px;border-radius:13px;background:#fff8e8;border:1px solid #ffe9b5;color:#88601a;font-size:12px;line-height:1.5;margin:15px 0}.success{padding:18px;border-radius:14px;background:#edfbf6;color:#167c5d;text-align:center;margin-top:16px}.success .check{font-size:30px}.success strong{display:block;margin:7px}.errorbox{padding:13px;background:#fff0f3;color:#c33d5c;border:1px solid #ffd8e0;border-radius:12px;font-size:12px;margin:12px 0}.metric{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric .card{padding:16px}.metric b{font-size:22px;display:block}.metric small{color:var(--muted)}.historyrow{display:grid;grid-template-columns:1.2fr 1fr 1fr .8fr;gap:10px;align-items:center;padding:15px 0;border-bottom:1px solid #f0f1f7;font-size:13px}.historyhead{font-size:10px;color:#9299ad;font-weight:800;text-transform:uppercase}.profileline{padding:14px 0;border-bottom:1px solid #f0f1f7;display:flex;justify-content:space-between;font-size:13px}.login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#eef2ff,#f7f1ff);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.login-card{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 25px 80px #29366b20}.login-card .brand{margin-bottom:25px}.login-card h2{font-size:25px;margin:0 0 7px}.login-card p{color:var(--muted);font-size:13px;line-height:1.5}.toast{position:fixed;bottom:22px;right:22px;background:#172246;color:#fff;padding:13px 18px;border-radius:12px;box-shadow:0 12px 35px #18234a33;font-size:13px;display:none;z-index:5}.mobiletop{display:none}
+@media(max-width:760px){.app{display:block}.sidebar{width:auto;padding:12px 14px;border-right:0;border-bottom:1px solid var(--line);gap:12px}.brand{font-size:20px}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;padding:10px}.nav button .ico{display:none}.side-note{display:none}.main{padding:20px 15px}.topbar{margin-bottom:20px}.topbar h1{font-size:22px}.user{font-size:0;padding:5px}.user .avatar{font-size:12px}.grid{grid-template-columns:1fr}.metric{grid-template-columns:1fr 1fr}.historyrow{grid-template-columns:1.2fr 1fr .8fr}.historyrow>*:nth-child(3){display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brandmark">F</div> FINOVA <span class="beta">BETA</span></div>
+  <nav class="nav">
+    <button class="active" data-page="home"><span class="ico">⌂</span>Overview</button>
+    <button data-page="transfer"><span class="ico">↗</span>Transfer</button>
+    <button data-page="payment"><span class="ico">▣</span>Payments</button>
+    <button data-page="history"><span class="ico">◷</span>Transactions</button>
+    <button data-page="profile"><span class="ico">◎</span>Profile</button>
+  </nav>
+  <div class="side-note"><b>FINOVA Beta Experience</b><br>Explore the app as a beta tester. This is a classroom simulation. No real money or banking services are involved.</div>
+</aside>
+<main class="main">
+  <div class="topbar"><div><div class="eyebrow">Your money, moving forward</div><h1 id="pageTitle">Overview</h1></div><div class="user"><div class="avatar">A</div> Alex Morgan</div></div>
+  <div class="content">
+    <section class="section active" id="home">
+      <div class="welcome"><h2>Good morning, Alex 👋</h2><p>Here's what's happening with your FINOVA account today.</p></div>
+      <div class="grid">
+        <div class="card balance-card"><div class="balance-label">Total available balance</div><div class="balance" id="balanceHome">Rp 8,450,000</div><div class="smallrow"><span>••••  ••••  ••••  4821</span><span>●●●●</span></div></div>
+        <div class="card"><h3 class="card-title">Quick actions</h3><div class="quick"><button data-go="transfer"><span>↗</span>Transfer</button><button data-go="payment"><span>▣</span>Pay</button><button data-go="history"><span>◷</span>History</button></div></div>
+        <div class="card"><h3 class="card-title">Recent activity</h3>
+          <div class="activity"><div class="left"><div class="bubble">☕</div><div><strong>Morning Coffee</strong><small>Today · 08:42</small></div></div><span class="amount negative">- Rp 35,000</span></div>
+          <div class="activity"><div class="left"><div class="bubble">↗</div><div><strong>Transfer received</strong><small>Yesterday · 16:20</small></div></div><span class="amount positive">+ Rp 750,000</span></div>
+          <div class="activity"><div class="left"><div class="bubble">🛍</div><div><strong>Urban Store</strong><small>Yesterday · 12:05</small></div></div><span class="amount negative">- Rp 249,000</span></div>
+        </div>
+        <div class="card"><h3 class="card-title">Your account health</h3><div class="metric"><div><b style="color:#16b887">98%</b><small>Uptime</small></div><div><b>1.2s</b><small>Avg. speed</small></div><div><b>Secure</b><small>Account</small></div></div><div class="notice">✨ Your FINOVA beta account is ready to explore.</div></div>
+      </div>
+    </section>
+    <section class="section" id="transfer">
+      <div class="card formcard"><h2 class="card-title">Send money</h2><p class="hint">Transfer funds to another FINOVA user.</p>
+        <div class="field"><label>Recipient name</label><input id="recipient" value="Jordan Lee" placeholder="Enter recipient name"></div>
+        <div class="field"><label>Account number</label><input id="account" value="0812 3456 7890" placeholder="Enter account number"></div>
+        <div class="field"><label>Amount (IDR)</label><input id="transferAmount" type="number" value="500000" min="1000"></div>
+        <div class="field"><label>Note (optional)</label><input id="transferNote" value="Lunch payment" placeholder="What's it for?"></div>
+        <div class="notice">Demo mode: transactions are simulated. No real funds will move.</div><p class="hint">Tip: Try an unusual account number format during testing.</p>
+        <button class="primary" id="sendBtn">Review & transfer</button>
+        <div id="transferResult"></div>
+      </div>
+    </section>
+    <section class="section" id="payment">
+      <div class="card formcard"><h2 class="card-title">Scan & pay</h2><p class="hint">Pay a merchant using your FINOVA balance.</p>
+        <div class="field"><label>Merchant</label><input id="merchant" value="NOVA MART"></div>
+        <div class="field"><label>Payment reference</label><input id="reference" value="NM-2048-771"></div>
+        <div class="field"><label>Amount (IDR)</label><input id="paymentAmount" type="number" value="125000"></div>
+        <div class="notice">Merchant: NOVA MART · Demo checkout</div>
+        <button class="primary" id="payBtn">Pay now</button>
+        <div id="paymentResult"></div>
+      </div>
+    </section>
+    <section class="section" id="history">
+      <div class="card"><h2 class="card-title">Transaction history</h2><p class="hint">Your latest account activity.</p>
+        <div class="historyrow historyhead"><span>Details</span><span>Date</span><span>Status</span><span>Amount</span></div>
+        <div id="historyRows">
+          <div class="historyrow"><span><b>Morning Coffee</b><br><small>Merchant payment</small></span><span>Today, 08:42</span><span class="positive">Completed</span><b>-35,000</b></div>
+          <div class="historyrow"><span><b>Transfer received</b><br><small>From Taylor</small></span><span>Yesterday</span><span class="positive">Completed</span><b>+750,000</b></div>
+          <div class="historyrow"><span><b>Urban Store</b><br><small>Card payment</small></span><span>Yesterday</span><span class="positive">Completed</span><b>-249,000</b></div>
+          <div class="historyrow"><span><b>Internet bill</b><br><small>Monthly bill</small></span><span>12 May</span><span class="positive">Completed</span><b>-350,000</b></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="profile">
+      <div class="card formcard"><h2 class="card-title">Personal profile</h2><div class="profileline"><span>Full name</span><b>Alex Morgan</b></div><div class="profileline"><span>Email</span><b>alex.morgan@email.test</b></div><div class="profileline"><span>Phone</span><b>+62 812-0000-4821</b></div><div class="profileline"><span>Account type</span><b>FINOVA Everyday</b></div><div class="profileline"><span>Verification</span><b style="color:#16b887">Verified</b></div>
+        <div class="field"><label>Update display name</label><input id="newProfileName" value="Alex Morgan"></div>
+        <button class="secondary" id="saveProfileBtn">Save profile changes</button>
+        <div id="profileResult"></div>
+        <div class="notice">This is a fictional classroom profile. Do not enter real personal or banking information.</div>
+        <p class="hint">Privacy check: notice which personal details are fully visible on this screen.</p></div>
+    </section>
+  </div>
+</main>
+</div>
+<div class="login-overlay" id="loginOverlay"><div class="login-card"><div class="brand"><div class="brandmark">F</div> FINOVA <span class="beta">BETA</span></div><h2>Welcome back</h2><p>Sign in to explore your FINOVA beta account. Use the demo credentials below.</p><div class="field"><label>Email address</label><input id="loginEmail" value="alex.morgan@email.test"></div><div class="field"><label>Password</label><input id="loginPassword" type="password" value="finova-demo"></div><button class="primary" id="loginBtn">Sign in to FINOVA</button><p style="font-size:11px;margin-top:14px">Demo only · No real account or financial information is used.</p></div></div>
+<div class="toast" id="toast"></div>
+<script>
+let balance=8450000, txCount=0;
+const $=id=>document.getElementById(id);
+function money(n){return 'Rp '+Math.max(0,n).toLocaleString('id-ID')}
+function showToast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+function go(page){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===page));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const names={home:'Overview',transfer:'Transfer',payment:'Payments',history:'Transactions',profile:'Profile'};$('pageTitle').textContent=names[page]||'Overview';window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+function updateBalance(){ $('balanceHome').textContent=money(balance); }
+// Demo sign-in gate. The prefilled credentials are fictional and only unlock this local simulation.
+$('loginOverlay').style.display='flex';
+$('loginBtn').addEventListener('click',()=>{if($('loginEmail').value.trim() && $('loginPassword').value){$('loginOverlay').style.display='none';showToast('Welcome to FINOVA beta');}else{showToast('Enter the demo credentials to continue');}});
+function addHistory(title,amount,status='Completed'){const row=document.createElement('div');row.className='historyrow';row.innerHTML=`<span><b>${title}</b><br><small>Recent transaction</small></span><span>Just now</span><span class="${status==='Completed'?'positive':''}">${status}</span><b>${amount<0?'-':'+'}${Math.abs(amount).toLocaleString('id-ID')}</b>`;$('historyRows').prepend(row)}
+$('sendBtn').addEventListener('click',()=>{
+ const amount=Number($('transferAmount').value),name=$('recipient').value.trim();
+ if(!name||!amount||amount<1000){$('transferResult').innerHTML='<div class="errorbox">Please enter a recipient and a valid amount.</div>';return}
+ if(amount>balance){$('transferResult').innerHTML='<div class="errorbox">Insufficient balance.</div>';return}
+ // INTENTIONAL CLASSROOM DEFECT: transfer is deducted twice.
+ balance-=amount;balance-=amount;txCount++;
+ updateBalance();
+ $('transferResult').innerHTML=`<div class="success"><div class="check">✓</div><strong>Transfer successful!</strong>Rp ${amount.toLocaleString('id-ID')} sent to ${name}.<br><small>Reference: FN-${Date.now().toString().slice(-7)}</small></div>`;
+ addHistory('Transfer to '+name,-amount,'Pending');
+ showToast('Transfer completed');
+});
+$('saveProfileBtn').addEventListener('click',()=>{
+ const proposed=$('newProfileName').value.trim();
+ if(!proposed){$('profileResult').innerHTML='<div class="errorbox">Please enter a name.</div>';return}
+ // INTENTIONAL CLASSROOM DEFECT: the UI confirms saving but the profile display is not updated.
+ $('profileResult').innerHTML='<div class="success"><strong>Profile updated successfully!</strong>Your changes have been saved.</div>';
+ showToast('Profile saved');
+});
+$('payBtn').addEventListener('click',()=>{
+ const amount=Number($('paymentAmount').value),merchant=$('merchant').value.trim();
+ if(!merchant||!amount||amount<1000){$('paymentResult').innerHTML='<div class="errorbox">Please enter a merchant and valid amount.</div>';return}
+ if(amount>balance){$('paymentResult').innerHTML='<div class="errorbox">Insufficient balance.</div>';return}
+ // INTENTIONAL CLASSROOM DEFECT: payment deducts funds but provides no confirmation and balance display is stale.
+ balance-=amount;txCount++;
+ // INTENTIONAL CLASSROOM DEFECT: payment is not added to transaction history.
+ $('paymentResult').innerHTML='<div class="notice">Payment is being processed. You may close this page.</div>';
+ showToast('Payment submitted');
+});
+</script>
+</body>
+</html>
