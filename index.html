@@ -25,12 +25,12 @@ button,input{font:inherit}button{cursor:pointer;border:0}.app{min-height:100vh;d
   <div class="side-note"><b>FINOVA Beta Experience</b><br>Explore the app as a beta tester. This is a classroom simulation. No real money or banking services are involved.</div>
 </aside>
 <main class="main">
-  <div class="topbar"><div><div class="eyebrow">Your money, moving forward</div><h1 id="pageTitle">Overview</h1></div><div class="user"><div class="avatar">A</div> Alex Morgan</div></div>
+  <div class="topbar"><div><div class="eyebrow">Your money, moving forward</div><h1 id="pageTitle">Overview</h1></div><div class="user"><div class="avatar">A</div> Alex M.</div></div>
   <div class="content">
     <section class="section active" id="home">
       <div class="welcome"><h2>Good morning, Alex 👋</h2><p>Here's what's happening with your FINOVA account today.</p></div>
       <div class="grid">
-        <div class="card balance-card"><div class="balance-label">Total available balance</div><div class="balance" id="balanceHome">Rp 8,450,000</div><div class="smallrow"><span>••••  ••••  ••••  4821</span><span>●●●●</span></div></div>
+        <div class="card balance-card"><div class="balance-label">Total available balance</div><div class="balance" id="balanceHome">Rp 8,450,000</div><div class="smallrow"><span>••••  ••••  ••••  ••••</span><span>●●●●</span></div></div>
         <div class="card"><h3 class="card-title">Quick actions</h3><div class="quick"><button data-go="transfer"><span>↗</span>Transfer</button><button data-go="payment"><span>▣</span>Pay</button><button data-go="history"><span>◷</span>History</button></div></div>
         <div class="card"><h3 class="card-title">Recent activity</h3>
           <div class="activity"><div class="left"><div class="bubble">☕</div><div><strong>Morning Coffee</strong><small>Today · 08:42</small></div></div><span class="amount negative">- Rp 35,000</span></div>
@@ -46,7 +46,7 @@ button,input{font:inherit}button{cursor:pointer;border:0}.app{min-height:100vh;d
         <div class="field"><label>Account number</label><input id="account" value="0812 3456 7890" placeholder="Enter account number"></div>
         <div class="field"><label>Amount (IDR)</label><input id="transferAmount" type="number" value="500000" min="1000"></div>
         <div class="field"><label>Note (optional)</label><input id="transferNote" value="Lunch payment" placeholder="What's it for?"></div>
-        <div class="notice">Demo mode: transactions are simulated. No real funds will move.</div>
+        <div class="notice">Demo mode: transactions are simulated. No real funds will move.</div><p class="hint">Tip: Try an unusual account number format during testing.</p>
         <button class="primary" id="sendBtn">Review & transfer</button>
         <div id="transferResult"></div>
       </div>
@@ -73,12 +73,17 @@ button,input{font:inherit}button{cursor:pointer;border:0}.app{min-height:100vh;d
       </div>
     </section>
     <section class="section" id="profile">
-      <div class="card formcard"><h2 class="card-title">Personal profile</h2><div class="profileline"><span>Full name</span><b>Alex Morgan</b></div><div class="profileline"><span>Email</span><b>alex.morgan@email.test</b></div><div class="profileline"><span>Phone</span><b>+62 812-0000-4821</b></div><div class="profileline"><span>Account type</span><b>FINOVA Everyday</b></div><div class="profileline"><span>Verification</span><b style="color:#16b887">Verified</b></div><div class="notice">This is a fictional classroom profile. Do not enter real personal or banking information.</div></div>
+      <div class="card formcard"><h2 class="card-title">Personal profile</h2><div class="profileline"><span>Full name</span><b>Alex M.</b></div><div class="profileline"><span>Email</span><b>al••••••••@e••••.test</b></div><div class="profileline"><span>Phone</span><b>+62 812-••••-••21</b></div><div class="profileline"><span>Account type</span><b>FINOVA Everyday</b></div><div class="profileline"><span>Verification</span><b style="color:#16b887">Verified</b></div>
+        <div class="field"><label>Update display name</label><input id="newProfileName" value="Alex M."></div>
+        <button class="secondary" id="saveProfileBtn">Save profile changes</button>
+        <div id="profileResult"></div>
+        <div class="notice">This is a fictional classroom profile. Do not enter real personal or banking information.</div>
+        <p class="hint">Your personal details are masked for privacy.</p></div>
     </section>
   </div>
 </main>
 </div>
-<div class="login-overlay" id="loginOverlay"><div class="login-card"><div class="brand"><div class="brandmark">F</div> FINOVA <span class="beta">BETA</span></div><h2>Welcome back</h2><p>Sign in to explore your FINOVA beta account. Use the demo credentials below.</p><div class="field"><label>Email address</label><input id="loginEmail" value="alex.morgan@email.test"></div><div class="field"><label>Password</label><input id="loginPassword" type="password" value="finova-demo"></div><button class="primary" id="loginBtn">Sign in to FINOVA</button><p style="font-size:11px;margin-top:14px">Demo only · No real account or financial information is used.</p></div></div>
+<div class="login-overlay" id="loginOverlay"><div class="login-card"><div class="brand"><div class="brandmark">F</div> FINOVA <span class="beta">BETA</span></div><h2>Welcome back</h2><p>Sign in to explore your FINOVA beta account. Use the demo credentials below.</p><div class="field"><label>Email address</label><input id="loginEmail" value="alex••••@e••••.test"></div><div class="field"><label>Password</label><input id="loginPassword" type="password" value="finova-demo"></div><button class="primary" id="loginBtn">Sign in to FINOVA</button><p style="font-size:11px;margin-top:14px">Demo only · No real account or financial information is used.</p></div></div>
 <div class="toast" id="toast"></div>
 <script>
 let balance=8450000, txCount=0;
@@ -101,8 +106,15 @@ $('sendBtn').addEventListener('click',()=>{
  balance-=amount;balance-=amount;txCount++;
  updateBalance();
  $('transferResult').innerHTML=`<div class="success"><div class="check">✓</div><strong>Transfer successful!</strong>Rp ${amount.toLocaleString('id-ID')} sent to ${name}.<br><small>Reference: FN-${Date.now().toString().slice(-7)}</small></div>`;
- addHistory('Transfer to '+name,-amount,'Completed');
+ addHistory('Transfer to '+name,-amount,'Pending');
  showToast('Transfer completed');
+});
+$('saveProfileBtn').addEventListener('click',()=>{
+ const proposed=$('newProfileName').value.trim();
+ if(!proposed){$('profileResult').innerHTML='<div class="errorbox">Please enter a name.</div>';return}
+ // INTENTIONAL CLASSROOM DEFECT: the UI confirms saving but the profile display is not updated.
+ $('profileResult').innerHTML='<div class="success"><strong>Profile updated successfully!</strong>Your changes have been saved.</div>';
+ showToast('Profile saved');
 });
 $('payBtn').addEventListener('click',()=>{
  const amount=Number($('paymentAmount').value),merchant=$('merchant').value.trim();
@@ -110,8 +122,8 @@ $('payBtn').addEventListener('click',()=>{
  if(amount>balance){$('paymentResult').innerHTML='<div class="errorbox">Insufficient balance.</div>';return}
  // INTENTIONAL CLASSROOM DEFECT: payment deducts funds but provides no confirmation and balance display is stale.
  balance-=amount;txCount++;
- addHistory(merchant,-amount,'Completed');
- $('paymentResult').innerHTML='<div class="notice">Please wait while we process your payment...</div>';
+ // INTENTIONAL CLASSROOM DEFECT: payment is not added to transaction history.
+ $('paymentResult').innerHTML='<div class="notice">Payment is being processed. You may close this page.</div>';
  showToast('Payment submitted');
 });
 </script>
